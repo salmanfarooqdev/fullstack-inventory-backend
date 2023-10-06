@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/item/create">Create Item</a>
+      <a href="/category/create">Create Category</a>
+    </nav>
+    <h1><%= title %></h1>
+        <div class="content">
+            <form action="" method="post">
+                <label for="cname">name:</label>
+                <input type="text" name="cname" required id="cname" minlength="1" maxlength="50">
+
+                <label for="cdesc">description:</label>
+                <input type="text" name="cdesc" id="cdesc">
+
+                <input type="submit">
+
+            </form>
+        </div>
+  </body>
+</html>

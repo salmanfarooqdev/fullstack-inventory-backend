@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/item/create">Create Item</a>
+      <a href="/category/create">Create Category</a>
+    </nav>
+    <h1><%= title %></h1>
+        <div class="content">
+
+            <h1>Item Name: <%= locals.itemInstance.name %></h1>
+            <p>Item description: <%= itemInstance.description %></p>
+            <p> Item category: <a href='<%= itemInstance.category.url  %>'><%= itemInstance.category.name %></a> </p>
+            <p>Item author: <%= itemInstance.author %></p>
+            <br><br>
+            <a href="<%= itemInstance.url%>/delete">Delete Item</a>
+            <a href="<%= itemInstance.url%>/update">update Item</a>
+
+
+
+            
+        </div>
+  </body>
+</html>

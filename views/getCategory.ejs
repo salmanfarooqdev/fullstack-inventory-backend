@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/item/create">Create Item</a>
+      <a href="/category/create">Create Category</a>
+    </nav>
+    <h1><%= title %></h1>
+        <div class="content">
+
+            <h1>Category Name: <%= locals.category.name %></h1>
+            <p>Item description: <%= category.description %></p>
+            <br><br>
+
+            <h2>Items</h2>
+            <ul>
+                <% if (items.length > 0) { %>
+                    <% items.forEach(function(item) { %>
+                    <li>
+                        <a href="<%= item.url %>"><%= item.name %></a>
+                    </li>
+                    <% }); %>
+                <% } else { %>
+                    <li>There are no Items.</li>
+                <% } %>
+                </ul>
+
+                <br><br>
+            <a href="<%= category.url%>/delete">Delete Category</a>
+          
+        </div>
+
+  </body>
+</html>

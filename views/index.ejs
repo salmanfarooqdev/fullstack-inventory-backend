@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/item/create">Create Item</a>
+      <a href="/category/create">Create Category</a>
+    </nav>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div class="content">
+      <h2>Categories</h2>
+      <ul>
+          <% if (categories.length > 0) { %>
+              <% categories.forEach(function(cat) { %>
+              <li>
+                  <a href="<%= cat.url %>"><%= cat.name %></a> 
+              </li>
+              <% }); %>
+          <% } else { %>
+              <li>There are no categories.</li>
+          <% } %>
+      </ul>
+
+      <h2>Items</h2>
+            <ul>
+                <% if (items.length > 0) { %>
+                    <% items.forEach(function(item) { %>
+                    <li>
+                        <a href="<%= item.url %>"><%= item.name %></a> (<%= item.category.name %>)
+                    </li>
+                    <% }); %>
+                <% } else { %>
+                    <li>There are no Items.</li>
+                <% } %>
+            </ul>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/item/create">Create Item</a>
+      <a href="/category/create">Create Category</a>
+    </nav>
+    <h1><%= title %></h1>
+        <div class="content">
+            <form action="" method="post">
+                <label for="name">name:</label>
+                <input type="text" name="name" id="name" minlength="1" maxlength="50">
+
+                <label for="desc">description:</label>
+                <input type="text" name="desc" id="desc">
+
+                <label for="category">Category</label>
+                <select id='category' type='select' placeholder='Select category' name='category' >
+                    <% categories.forEach(function(cat) { %>
+                        <option value='<%= cat._id %>'><%= cat.name %></option>
+                    <% }); %>
+                </select>
+                
+                <label for="author">author:</label>
+                <input type="text" name="author" id="author" required minlength="1" maxlength="50">
+
+                <input type="submit">
+
+            </form>
+        </div>
+  </body>
+</html>

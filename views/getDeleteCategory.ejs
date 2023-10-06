@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/item/create">Create Item</a>
+      <a href="/category/create">Create Category</a>
+    </nav>
+    <h1><%= title %></h1>
+        <div class="content">
+        
+                <% if (items.length === 0) { %>
+                    <form action="" method="post">
+                        <input type="submit" value="delete category">
+                       </form>
+                   
+            </ul>
+            <% } else { %>
+                <h2>Delete these items first</h2>
+                <ul>
+                    <% items.forEach(function(item) { %>
+                        <li>
+                            <a href="<%= item.url %>"><%= item.name %></a>
+                        </li>
+                        <% }); %>
+
+                    <% } %>
+
+          
+
+
+
+            
+        </div>
+  </body>
+</html>
