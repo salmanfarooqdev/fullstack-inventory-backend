@@ -9,9 +9,8 @@ const { body, validationResult } = require("express-validator");
 exports.getCreateItem = asyncHandler(async (req, res, next) => {
     
     const category = await Category.find({}).exec();
-    res.render("getCreateItem", {
-        title: 'Create Item',
-        categories: category,
+    res.json( {
+       category
     });
   });
 
@@ -35,12 +34,9 @@ exports.postCreateItem = [
 
         if (!errors.isEmpty()) {
             // If there are validation errors, render the form again with error messages.
-            const category = await Category.find({}).exec();
-            return res.render('getCreateItem', {
-                title: 'Create Item',
-                categories: category,
-                errors: errors.array(),
-            });
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+              }
         }
 
           const item = new Item({
@@ -52,7 +48,7 @@ exports.postCreateItem = [
         });
 
         await item.save();
-        res.redirect(item.url);
+        res.status(201).json({ item });
     })
 ];
 
@@ -61,8 +57,7 @@ exports.getItem = asyncHandler(async (req, res, next) => {
     
     const item = await Item.find({_id: req.params.id}).populate('category').exec();
 
-    res.render("getItem", {
-        title: 'Item Detail',
+    res.json( {
         itemInstance: item[0],
     });
   });
@@ -78,7 +73,7 @@ exports.getItem = asyncHandler(async (req, res, next) => {
   exports.postDeleteItem = asyncHandler(async (req, res, next) => {
     
     const item = await Item.findByIdAndDelete(req.params.id);
-    res.redirect('/');
+    res.status(201).json({ item });
   });
 
   // /item/:id/update
@@ -88,8 +83,7 @@ exports.getItem = asyncHandler(async (req, res, next) => {
     const category = await Category.find({}).exec();
 
     
-    res.render("getUpdateItem", {
-        title: 'Update Item',
+    res.json({
         item: item[0],
         categories: category,
     });
@@ -112,14 +106,9 @@ exports.getItem = asyncHandler(async (req, res, next) => {
 
         if (!errors.isEmpty()) {
             // If there are validation errors, render the form again with error messages.
-            const category = await Category.find({}).exec();
-            const item = await Item.find({_id: req.params.id}).exec();
-
-            res.render("getUpdateItem", {
-                title: 'Update Item',
-                item: item[0],
-                categories: category,
-            });
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+              }
         }
 
           const item = await Item.findByIdAndUpdate(req.params.id, 
@@ -131,7 +120,7 @@ exports.getItem = asyncHandler(async (req, res, next) => {
 
         }).exec();
 
-        res.redirect(item.url);
+        res.status(201).json({ item });
     })
   ];
 

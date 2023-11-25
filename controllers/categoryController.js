@@ -6,7 +6,7 @@ const { body, validationResult } = require("express-validator");
 
 
 exports.getCreateCategory = asyncHandler(async (req, res, next) => {
-    res.render("getCreatecategory", {
+    res.json( {
         title: 'Create Category',
     });
   });
@@ -20,7 +20,9 @@ exports.postCreateCategory = [
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            next(new Error('An Error Happened'));
+         
+            return res.status(400).json({ errors: errors.array() });
+          
         }
 
           const category = new Category({
@@ -29,7 +31,7 @@ exports.postCreateCategory = [
         });
 
         await category.save();
-        res.redirect(category.url);
+        res.status(201).json({ category });
     })
 ];
 
@@ -37,8 +39,7 @@ exports.getCategory = asyncHandler(async (req, res, next) => {
     const category = await Category.find({_id: req.params.id}).exec();
     const items = await Item.find({category: req.params.id}).exec();
 
-    res.render("getCategory", {
-        title: 'Category Detail',
+    res.json({
         category: category[0],
         items: items,
     });

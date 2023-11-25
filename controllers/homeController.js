@@ -8,9 +8,9 @@ exports.homePage = asyncHandler(async (req, res, next) => {
     const item = await Item.find({}).populate('category').exec();
     const category = await Category.find({}).exec();
 
-    res.render("index", {
+    res.json({
         title: 'Item Inventory System',
-        items: item,
-        categories: category,
+        item,
+        category,
     });
   });
